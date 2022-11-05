@@ -28,13 +28,25 @@ function Board(props: BoardProps) {
     onDragEnter,
     updateCard,
   } = props;
+  const [inputText, setInputText] = useState(board.title);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputText(event.target.value);
+  };
+
+
   const [showDropdown, setShowDropdown] = useState(false);
   return (
     <div className="board">
       <div className="board-inner" key={board?.id}>
         <div className="board-header">
           <p className="board-header-title">
-            {board?.title}
+            <input className="custom-input"
+                   value={inputText || ""}
+                   type="text"
+                   autoFocus
+                   onChange={handleChange}
+
+            />
             <span>{board?.cards?.length || 0}</span>
           </p>
           <div

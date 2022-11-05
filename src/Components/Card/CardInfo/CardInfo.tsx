@@ -3,16 +3,18 @@ import { Calendar, CheckSquare, List, Tag, Trash, Type } from "react-feather";
 import { colorsList } from "../../../Helper/Util";
 import Modal from "../../Modal/Modal";
 import CustomInput from "../../CustomInput/CustomInput";
-
 import "./CardInfo.css";
 import { ICard, ILabel, ITask } from "../../../Interfaces/Kanban";
 import Chip from "../../Common/Chip";
+
 interface CardInfoProps {
   onClose: () => void;
   card: ICard;
   boardId: number;
   updateCard: (boardId: number, cardId: number, card: ICard) => void;
 }
+
+
 function CardInfo(props: CardInfoProps) {
   const { onClose, card, boardId, updateCard } = props;
   const [selectedColor, setSelectedColor] = useState("");

@@ -2,7 +2,7 @@
   min-width: 290px;
   width: 290px;
   height: 100%;
-  overflow-y: auto;
+  /*overflow-y: auto;*/
   flex-basis: 290px;
   display: flex;
   flex-direction: column;
@@ -14,7 +14,7 @@
 .board-inner{
   background-color: rgb(223 227 230 / 55%);
   padding: 15px;
-  border-radius: 3px;
+  border-radius: 10px;
 }
 .board-header {
   display: flex;
@@ -32,7 +32,7 @@
 }
 
 .board-header-title span {
-  color: rgb(145, 145, 145);
+  color: rgb(42, 123, 164);
 }
 
 .board-header-title-more {
@@ -73,4 +73,17 @@
   background-color: #fff;
   border-radius: 10px;
   padding: 10px;
+}
+
+
+.custom-input {
+
+  padding: 0.375rem 0.75rem;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }

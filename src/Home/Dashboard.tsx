@@ -20,7 +20,9 @@ function Dashboard() {
     cardId: 0,
   });
 
-  const addboardHandler = (name: string) => {
+
+
+  const addBoardHandler = (name: string) => {
     const tempBoardsList = [...boards];
     tempBoardsList.push({
       id: Date.now() + Math.random() * 2,
@@ -158,7 +160,7 @@ function Dashboard() {
               placeholder="Enter Board Name"
               text="Add Board"
               buttonText="Add Board"
-              onSubmit={addboardHandler}
+              onSubmit={addBoardHandler}
             />
           </div>
         </div>

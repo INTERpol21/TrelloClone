@@ -3,13 +3,13 @@ import { IBoard } from "../Interfaces/Kanban";
 export const ApiMockResponse: IBoard[] = [
   {
     id: 1651319512266.7095,
-    title: "Discover",
+    title: "TODO",
     cards: [
       {
         id: 1651319552926.0933,
         title: "Task1",
         labels: [{ color: "#cf61a1", text: "Urgent" }],
-        date: "2022-05-05",
+        date: "2022-11-06",
         tasks: [
           { id: 1651319625559.8025, completed: true, text: "Task1_subtask1" },
           { id: 1651319629650.8945, completed: true, text: "Task1_subtask2" },
@@ -28,7 +28,7 @@ export const ApiMockResponse: IBoard[] = [
   },
   {
     id: 1651319523126.113,
-    title: "Doing",
+    title: "In Progress",
     cards: [
       {
         id: 1651319672685.5078,
@@ -43,26 +43,26 @@ export const ApiMockResponse: IBoard[] = [
   },
   {
     id: 1651319530017.122,
-    title: "In-Review",
+    title: "Testing",
     cards: [
       {
         id: 1651319677070.0732,
         title: "Task4",
         labels: [{ color: "#8da377", text: "figma" }],
-        date: "2022-05-06",
+        date: "2022-11-06",
         tasks: [],
       },
     ],
   },
   {
     id: 1651319535931.4182,
-    title: "Completed",
+    title: "Done",
     cards: [
       {
         id: 1651319680948.0479,
         title: "Task5",
         labels: [{ color: "#4fcc25", text: "Payment API" }],
-        date: "2022-05-04",
+        date: "2022-11-06",
         tasks: [
           { id: 1651319820180.9648, completed: false, text: "GraphQl" },
           { id: 1651319833779.3252, completed: true, text: "Restful API" },

@@ -22,8 +22,15 @@ function CustomInput(props: CustomInputProps) {
     defaultValue,
     buttonText,
   } = props;
+
+  const [inputText, setInputText] = useState(defaultValue);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputText(event.target.value);
+  };
+
   const [isCustomInput, setIsCustomInput] = useState(false);
-  const [inputText, setInputText] = useState(defaultValue || "");
+
 
   const submission = (e: any) => {
     e.preventDefault();
@@ -34,6 +41,8 @@ function CustomInput(props: CustomInputProps) {
     setIsCustomInput(false);
   };
 
+
+
   return (
     <div className="custom-input">
       {isCustomInput ? (
@@ -43,10 +52,12 @@ function CustomInput(props: CustomInputProps) {
         >
           <input
             type="text"
-            value={inputText}
+            value={inputText || ""}
             placeholder={placeholder || text}
-            onChange={(event) => setInputText(event.target.value)}
             autoFocus
+            onChange={handleChange}
+
+
           />
           <div className="custom-input-edit-footer">
             <button type="submit">{buttonText || "Add"}</button>
