@@ -21,6 +21,10 @@
   gap: 10px;
   align-items: center;
 }
+.cardinfo-box-title-circle {
+padding: 0 0 0 30rem;
+  cursor: pointer;
+}
 
 .cardinfo-box-title p {
   font-weight: bold;

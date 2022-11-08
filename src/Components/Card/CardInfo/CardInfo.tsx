@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Calendar, CheckSquare, List, Tag, Trash, Type } from "react-feather";
+import { Calendar, CheckSquare, Coffee, List, Tag, Trash, Type, XCircle } from "react-feather";
 import { colorsList } from "../../../Helper/Util";
 import Modal from "../../Modal/Modal";
 import CustomInput from "../../CustomInput/CustomInput";
@@ -117,7 +117,26 @@ function CardInfo(props: CardInfoProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cardValues]);
 
+
+
   const calculatedPercent = calculatePercent();
+  //Информация в popup
+
+  const onKeydown = ({key}: KeyboardEvent) => {
+    switch (key) {
+      case 'Escape':
+        onClose()
+        break
+    }
+  }
+
+  // c помощью useEffect цепляем обработчик к нажатию клавиш
+  // https://ru.reactjs.org/docs/hooks-effect.html
+  useEffect(() => {
+    document.addEventListener('keydown', onKeydown)
+    return () => document.removeEventListener('keydown', onKeydown)
+  })
+
 
   return (
     <Modal onClose={onClose}>
@@ -126,7 +145,12 @@ function CardInfo(props: CardInfoProps) {
           <div className="cardinfo-box-title">
             <Type />
             <p>Title</p>
+            {/*Добавил выход из окна, по нажатию на X и через клавишу Escape*/}
+            <div onClick={onClose}  className="cardinfo-box-title-circle">
+              <XCircle />
+            </div>
           </div>
+
           <CustomInput
             defaultValue={cardValues.title}
             text={cardValues.title}
@@ -149,7 +173,7 @@ function CardInfo(props: CardInfoProps) {
 
         <div className="cardinfo-box">
           <div className="cardinfo-box-title">
-            <List />
+            <Coffee />
             <p>Comment</p>
           </div>
           <CustomInput

@@ -11,13 +11,12 @@ interface CustomInputProps {
   placeholder?: string;
   defaultValue?: string;
   buttonText?: string;
-  message?:string
+
 }
 
 
 function CustomInput(props: CustomInputProps) {
   const {
-    message,
     text,
     onSubmit,
     displayClass,
@@ -74,6 +73,7 @@ function CustomInput(props: CustomInputProps) {
           onClick={() => setIsCustomInput(true)}
         >
           {text}
+
         </p>
       )}
     </div>
