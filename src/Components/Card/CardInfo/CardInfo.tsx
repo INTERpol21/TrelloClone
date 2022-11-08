@@ -27,7 +27,12 @@ function CardInfo(props: CardInfoProps) {
   };
 
   const updateDesc = (value: string) => {
+
     setCardValues({ ...cardValues, desc: value });
+  };
+
+  const updateCom = (value: string) => {
+    setCardValues({ ...cardValues, message: value });
   };
 
   const addLabel = (label: ILabel) => {
@@ -129,7 +134,6 @@ function CardInfo(props: CardInfoProps) {
             onSubmit={updateTitle}
           />
         </div>
-
         <div className="cardinfo-box">
           <div className="cardinfo-box-title">
             <List />
@@ -140,6 +144,19 @@ function CardInfo(props: CardInfoProps) {
             text={cardValues.desc || "Add a Description"}
             placeholder="Enter description"
             onSubmit={updateDesc}
+          />
+        </div>
+
+        <div className="cardinfo-box">
+          <div className="cardinfo-box-title">
+            <List />
+            <p>Comment</p>
+          </div>
+          <CustomInput
+            defaultValue={cardValues.message}
+            text={cardValues.message || "Add a Comment"}
+            placeholder="Enter comment"
+            onSubmit={updateCom}
           />
         </div>
 

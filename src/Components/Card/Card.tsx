@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { AlignLeft, CheckSquare, Clock, MoreHorizontal } from "react-feather";
 import { formatDate } from "../../Helper/Util";
 import { ICard } from "../../Interfaces/Kanban";
@@ -15,12 +15,16 @@ interface CardProps {
   onDragEnter: (boardId: number, cardId: number) => void;
   updateCard: (boardId: number, cardId: number, card: ICard) => void;
 }
+
+//Карточка без popup
 function Card(props: CardProps) {
   const { card, boardId, removeCard, onDragEnd, onDragEnter, updateCard } =
     props;
-  const { id, title, desc, date, tasks, labels } = card;
+  const { id, title, desc, date, tasks, labels,message } = card;
   const [showDropdown, setShowDropdown] = useState(false);
   const [showModal, setShowModal] = useState(false);
+
+
 
   return (
     <>
@@ -70,6 +74,8 @@ function Card(props: CardProps) {
             <AlignLeft />
           </p>
         </div>
+
+
         <div className="card-footer">
           {date && (
             <p className="card-footer-item">

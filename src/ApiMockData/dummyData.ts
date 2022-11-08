@@ -16,6 +16,7 @@ export const ApiMockResponse: IBoard[] = [
           { id: 1651319633774.9905, completed: true, text: "Task1_subtask3" },
         ],
         desc: "Task1 Detail Description",
+        message:""
       },
       {
         id: 1651319568365.593,
@@ -38,6 +39,8 @@ export const ApiMockResponse: IBoard[] = [
         tasks: [
           { id: 1651319728301.3855, completed: false, text: "restore db" },
         ],
+        desc: "Task1 Detail Description",
+        message:""
       },
     ],
   },
@@ -51,6 +54,8 @@ export const ApiMockResponse: IBoard[] = [
         labels: [{ color: "#8da377", text: "figma" }],
         date: "2022-11-06",
         tasks: [],
+        desc: "Task1 Detail Description",
+        message:""
       },
     ],
   },
@@ -67,6 +72,8 @@ export const ApiMockResponse: IBoard[] = [
           { id: 1651319820180.9648, completed: false, text: "GraphQl" },
           { id: 1651319833779.3252, completed: true, text: "Restful API" },
         ],
+        desc: "Task1 Detail Description",
+        message:""
       },
     ],
   },

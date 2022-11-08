@@ -7,6 +7,7 @@ export interface ITask {
   id: number;
   completed: boolean;
   text: string;
+  message?:string
 }
 
 export interface ICard {
@@ -16,6 +17,7 @@ export interface ICard {
   date: string;
   tasks: ITask[];
   desc?: string;
+  message?:string
 }
 
 export interface IBoard {
@@ -23,3 +25,4 @@ export interface IBoard {
   title: string;
   cards: ICard[];
 }
+

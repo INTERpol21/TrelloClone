@@ -53,6 +53,9 @@ function Dashboard() {
       date: "",
       tasks: [],
       desc: "",
+      message:"",
+
+
     });
     setBoards(tempBoardsList);
   };
