@@ -142,15 +142,16 @@ function CardInfo(props: CardInfoProps) {
     <Modal onClose={onClose}>
       <div className="cardinfo">
         <div className="cardinfo-box">
+          {/*Добавил выход из окна, по нажатию на X и через клавишу Escape*/}
+          <div onClick={onClose}  className="cardinfo-box-title-circle">
+            <XCircle className="cardinfo-box-title-svg-circle" />
+          </div>
+
+
           <div className="cardinfo-box-title">
             <Type />
             <p>Title</p>
-            {/*Добавил выход из окна, по нажатию на X и через клавишу Escape*/}
-            <div onClick={onClose}  className="cardinfo-box-title-circle">
-              <XCircle />
-            </div>
           </div>
-
           <CustomInput
             defaultValue={cardValues.title}
             text={cardValues.title}

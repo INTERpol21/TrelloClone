@@ -22,8 +22,10 @@
   align-items: center;
 }
 .cardinfo-box-title-circle {
-padding: 0 0 0 30rem;
+  display: flex;
+  /* padding: 0 0 0 30rem; */
   cursor: pointer;
+  flex-direction: row-reverse;
 }
 
 .cardinfo-box-title p {
@@ -34,6 +36,10 @@ padding: 0 0 0 30rem;
 .cardinfo-box-title svg {
   height: 18px;
   width: 18px;
+}
+.cardinfo-box-title-svg-circle {
+  height: 28px;
+  width: 28px;
 }
 
 .cardinfo-box-labels {
