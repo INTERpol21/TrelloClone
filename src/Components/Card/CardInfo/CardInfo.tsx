@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Calendar, CheckSquare, Coffee, List, Tag, Trash, Type, XCircle } from "react-feather";
+import { Calendar, CheckSquare, List, MessageCircle, Tag, Trash, Type, XCircle } from "react-feather";
 import { colorsList } from "../../../Helper/Util";
 import Modal from "../../Modal/Modal";
 import CustomInput from "../../CustomInput/CustomInput";
 import "./CardInfo.css";
-import { ICard, ILabel, ITask } from "../../../Interfaces/Kanban";
+import { ICard, IComment, ILabel, ITask } from "../../../Interfaces/Kanban";
 import Chip from "../../Common/Chip";
 
 interface CardInfoProps {
@@ -31,9 +31,47 @@ function CardInfo(props: CardInfoProps) {
     setCardValues({ ...cardValues, desc: value });
   };
 
-  const updateCom = (value: string) => {
-    setCardValues({ ...cardValues, message: value });
+  // const updateCom = (value: string) => {
+  //   setCardValues({ ...cardValues, message: value });
+  // };
+
+  const addCom = (value: string) => {
+    const message: IComment = {
+      id: Date.now() + Math.random() * 2,
+      text: value,
+
+    };
+
+    setCardValues({
+      ...cardValues,
+      messages: [...cardValues.messages, message],
+    });
   };
+
+  // const updateCom = (id: number) => {
+  //   const messages = [...cardValues.messages];
+  //
+  //   const index = messages.findIndex((item) => item.id === id);
+  //   if (index < 0) return;
+  //
+  //
+  //   setCardValues({
+  //     ...cardValues,
+  //     messages
+  //   });
+  // };
+
+  const removeCom = (id: number) => {
+    const messages = [...cardValues.messages];
+
+    const tempTasks = messages.filter((item) => item.id !== id);
+    setCardValues({
+      ...cardValues,
+      messages: tempTasks,
+    });
+  };
+
+
 
   const addLabel = (label: ILabel) => {
     const index = cardValues.labels.findIndex(
@@ -142,12 +180,11 @@ function CardInfo(props: CardInfoProps) {
     <Modal onClose={onClose}>
       <div className="cardinfo">
         <div className="cardinfo-box">
+          {/*TITLE*/}
           {/*Добавил выход из окна, по нажатию на X и через клавишу Escape*/}
           <div onClick={onClose}  className="cardinfo-box-title-circle">
             <XCircle className="cardinfo-box-title-svg-circle" />
           </div>
-
-
           <div className="cardinfo-box-title">
             <Type />
             <p>Title</p>
@@ -159,6 +196,8 @@ function CardInfo(props: CardInfoProps) {
             onSubmit={updateTitle}
           />
         </div>
+
+        {/*Description*/}
         <div className="cardinfo-box">
           <div className="cardinfo-box-title">
             <List />
@@ -170,21 +209,37 @@ function CardInfo(props: CardInfoProps) {
             placeholder="Enter description"
             onSubmit={updateDesc}
           />
+
         </div>
 
+
+        {/*COMMENT*/}
         <div className="cardinfo-box">
           <div className="cardinfo-box-title">
-            <Coffee />
+            <MessageCircle />
             <p>Comment</p>
           </div>
+
+          <div className="cardinfo-box-task-list">
+            {cardValues.messages.map((item) => (
+              <div key={item.id} className="cardinfo-box-task-checkbox">
+                <p>{item.text}</p>
+                <Trash onClick={() => removeCom(item.id)} />
+              </div>
+            ))}
+          </div>
           <CustomInput
-            defaultValue={cardValues.message}
-            text={cardValues.message || "Add a Comment"}
+            text={"Add a comment"}
             placeholder="Enter comment"
-            onSubmit={updateCom}
+            onSubmit={addCom}
           />
         </div>
 
+
+
+
+
+        {/*DATE*/}
         <div className="cardinfo-box">
           <div className="cardinfo-box-title">
             <Calendar />
@@ -199,6 +254,7 @@ function CardInfo(props: CardInfoProps) {
           />
         </div>
 
+        {/*LABELS*/}
         <div className="cardinfo-box">
           <div className="cardinfo-box-title">
             <Tag />
@@ -228,6 +284,7 @@ function CardInfo(props: CardInfoProps) {
           />
         </div>
 
+        {/*TASKS*/}
         <div className="cardinfo-box">
           <div className="cardinfo-box-title">
             <CheckSquare />

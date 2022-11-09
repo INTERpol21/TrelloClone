@@ -54,8 +54,8 @@
 }
 .card-item{
   display: flex;
-  width: 50%;
-  justify-content: space-around;
+  justify-content: space-between;
+
 }
 
 

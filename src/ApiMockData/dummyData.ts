@@ -3,7 +3,7 @@ import { IBoard } from "../Interfaces/Kanban";
 export const ApiMockResponse: IBoard[] = [
   {
     id: 1651319512266.7095,
-    title: "TODO",
+    title: "ToDo",
     cards: [
       {
         id: 1651319552926.0933,
@@ -16,7 +16,9 @@ export const ApiMockResponse: IBoard[] = [
           { id: 1651319633774.9905, completed: true, text: "Task1_subtask3" },
         ],
         desc: "Task1 Detail Description",
-        message:""
+        messages:[
+          {id:1651319543435.593,text: "Task1_subtask1"}
+        ]
       },
       {
         id: 1651319568365.593,
@@ -24,6 +26,9 @@ export const ApiMockResponse: IBoard[] = [
         labels: [{ color: "#1ebffa", text: "Frontend" }],
         date: "",
         tasks: [],
+        messages:[
+          {id:1651319543435.593,text: "Task1_subtask1"}
+        ]
       },
     ],
   },
@@ -37,10 +42,12 @@ export const ApiMockResponse: IBoard[] = [
         labels: [{ color: "#9975bd", text: "Database" }],
         date: "",
         tasks: [
-          { id: 1651319728301.3855, completed: false, text: "restore db" },
+          { id: 1651319728301.3855, completed: false, text: "Redux" },
         ],
         desc: "Task1 Detail Description",
-        message:""
+        messages:[
+          {id:1651319543435.593,text: "Task1_subtask1"}
+        ]
       },
     ],
   },
@@ -55,7 +62,9 @@ export const ApiMockResponse: IBoard[] = [
         date: "2022-11-06",
         tasks: [],
         desc: "Task1 Detail Description",
-        message:""
+        messages:[
+          {id:1651319543435.593,text: "Task1_subtask1"}
+        ]
       },
     ],
   },
@@ -69,11 +78,12 @@ export const ApiMockResponse: IBoard[] = [
         labels: [{ color: "#4fcc25", text: "Payment API" }],
         date: "2022-11-06",
         tasks: [
-          { id: 1651319820180.9648, completed: false, text: "GraphQl" },
           { id: 1651319833779.3252, completed: true, text: "Restful API" },
         ],
         desc: "Task1 Detail Description",
-        message:""
+        messages:[
+          {id:1651319543435.593,text: "Task1_subtask1"}
+        ]
       },
     ],
   },

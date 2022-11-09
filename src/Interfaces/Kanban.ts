@@ -3,11 +3,17 @@ export interface ILabel {
   text: string;
 }
 
+export interface IComment {
+  id: number;
+  text: string;
+
+
+}
+
 export interface ITask {
   id: number;
   completed: boolean;
   text: string;
-  message?:string
 }
 
 export interface ICard {
@@ -17,7 +23,7 @@ export interface ICard {
   date: string;
   tasks: ITask[];
   desc?: string;
-  message?:string
+  messages:IComment[]
 }
 
 export interface IBoard {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AlignLeft, CheckSquare, Clock, Coffee, MoreHorizontal } from "react-feather";
+import { AlignLeft, CheckSquare, Clock, MessageCircle, MoreHorizontal } from "react-feather";
 import { formatDate } from "../../Helper/Util";
 import { ICard } from "../../Interfaces/Kanban";
 import Chip from "../Common/Chip";
@@ -20,7 +20,7 @@ interface CardProps {
 function Card(props: CardProps) {
   const { card, boardId, removeCard, onDragEnd, onDragEnter, updateCard } =
     props;
-  const { id, title, desc, date, tasks, labels,message } = card;
+  const { id, title, desc, date, tasks, labels,messages} = card;
   const [showDropdown, setShowDropdown] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
@@ -73,10 +73,13 @@ function Card(props: CardProps) {
           <p title={desc}>
             <AlignLeft />
           </p>
-          <p title={message}>
-            <Coffee />
-          </p>
 
+          {messages && messages.length > 0 && (
+            <p >
+              <MessageCircle  />
+              {messages?.filter((item) => item).length}
+            </p>
+          )}
         </div>
 
 
