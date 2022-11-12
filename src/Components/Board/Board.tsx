@@ -16,6 +16,7 @@ interface BoardProps {
   onDragEnd: (boardId: number, cardId: number) => void;
   onDragEnter: (boardId: number, cardId: number) => void;
   updateCard: (boardId: number, cardId: number, card: ICard) => void;
+  user:string
 }
 
 function Board(props: BoardProps) {
@@ -27,6 +28,7 @@ function Board(props: BoardProps) {
     onDragEnd,
     onDragEnter,
     updateCard,
+    user,
   } = props;
   const [inputText, setInputText] = useState(board.title);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,6 +69,7 @@ function Board(props: BoardProps) {
         <div className="board-cards custom-scroll">
           {board?.cards?.map((item) => (
             <Card
+              user={user}
               key={item.id}
               card={item}
               boardId={board.id}

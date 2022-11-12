@@ -12,20 +12,49 @@ body {
 }
 
 .app-nav {
-    padding: 5px 0px;
-    box-shadow: 0 1px 20px rgba(56, 40, 40, 0.05);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    background: transparent;
-    box-shadow: none;
+    /*    padding: 5px 0px;
+        box-shadow: 0 1px 20px rgba(56, 40, 40, 0.05);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        background: transparent;
+        box-shadow: none;*/
     color: #fff;
-    display: inline-block;
+    display: flex;
     font-size: 15px;
     margin-left: 15px;
     line-height: 36px;
     margin-right: 8px;
-    padding: 0;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app-nav-form{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+.app-nav-form-img{
+width: 28px;
+    margin: 0 10px 0 0;
+    border-radius: 22px;
+}
+
+.app-nav-form-input{
+    border-radius: 6px;
+}
+
+.app-nav-form-button{
+    padding: 6px 12px;
+    border-radius: 15px;
+    background-color: rgb(238 238 238);
+    color: rgb(0 0 0);
+    cursor: pointer;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin:0 0.6rem ;
 }
 
 .app-boards-container {
@@ -39,7 +68,7 @@ body {
 
 .app-boards {
     width: fit-content;
-    padding: 0px 30px;
+    padding: 0 30px;
     display: inline-flex;
     gap: 30px;
     height: 100%;
@@ -90,4 +119,17 @@ body {
 ::-webkit-scrollbar-thumb {
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px rgba(179, 174, 174, 0.5);
+}
+
+
+.form{
+    display: flex;
+    padding: 1rem 1rem 0 1rem;
+}
+
+
+.typography-modal{
+    display: flex;
+    justify-content: center;
+    padding: 0 0 1rem;
 }

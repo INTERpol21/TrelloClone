@@ -1,22 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { Calendar, CheckSquare, List, MessageCircle, Tag, Trash, Type, XCircle } from "react-feather";
+import { Calendar, CheckSquare, List, MessageCircle, Tag, Type, XCircle } from "react-feather";
 import { colorsList } from "../../../Helper/Util";
 import Modal from "../../Modal/Modal";
 import CustomInput from "../../CustomInput/CustomInput";
 import "./CardInfo.css";
 import { ICard, IComment, ILabel, ITask } from "../../../Interfaces/Kanban";
 import Chip from "../../Common/Chip";
+import Avatar from "../../../asserts/images/user.png";
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+
+
 
 interface CardInfoProps {
   onClose: () => void;
   card: ICard;
   boardId: number;
   updateCard: (boardId: number, cardId: number, card: ICard) => void;
+  user:string
 }
 
 
 function CardInfo(props: CardInfoProps) {
-  const { onClose, card, boardId, updateCard } = props;
+  const { onClose, card, boardId, updateCard, user} = props;
   const [selectedColor, setSelectedColor] = useState("");
   const [cardValues, setCardValues] = useState<ICard>({
     ...card,
@@ -39,7 +45,7 @@ function CardInfo(props: CardInfoProps) {
     const message: IComment = {
       id: Date.now() + Math.random() * 2,
       text: value,
-
+      user:user
     };
 
     setCardValues({
@@ -70,7 +76,6 @@ function CardInfo(props: CardInfoProps) {
       messages: tempTasks,
     });
   };
-
 
 
   const addLabel = (label: ILabel) => {
@@ -156,24 +161,23 @@ function CardInfo(props: CardInfoProps) {
   }, [cardValues]);
 
 
-
   const calculatedPercent = calculatePercent();
   //Информация в popup
 
-  const onKeydown = ({key}: KeyboardEvent) => {
+  const onKeydown = ({ key }: KeyboardEvent) => {
     switch (key) {
-      case 'Escape':
-        onClose()
-        break
+      case "Escape":
+        onClose();
+        break;
     }
-  }
+  };
 
   // c помощью useEffect цепляем обработчик к нажатию клавиш
   // https://ru.reactjs.org/docs/hooks-effect.html
   useEffect(() => {
-    document.addEventListener('keydown', onKeydown)
-    return () => document.removeEventListener('keydown', onKeydown)
-  })
+    document.addEventListener("keydown", onKeydown);
+    return () => document.removeEventListener("keydown", onKeydown);
+  });
 
 
   return (
@@ -182,7 +186,7 @@ function CardInfo(props: CardInfoProps) {
         <div className="cardinfo-box">
           {/*TITLE*/}
           {/*Добавил выход из окна, по нажатию на X и через клавишу Escape*/}
-          <div onClick={onClose}  className="cardinfo-box-title-circle">
+          <div onClick={onClose} className="cardinfo-box-title-circle">
             <XCircle className="cardinfo-box-title-svg-circle" />
           </div>
           <div className="cardinfo-box-title">
@@ -209,9 +213,7 @@ function CardInfo(props: CardInfoProps) {
             placeholder="Enter description"
             onSubmit={updateDesc}
           />
-
         </div>
-
 
         {/*COMMENT*/}
         <div className="cardinfo-box">
@@ -222,9 +224,18 @@ function CardInfo(props: CardInfoProps) {
 
           <div className="cardinfo-box-task-list">
             {cardValues.messages.map((item) => (
-              <div key={item.id} className="cardinfo-box-task-checkbox">
-                <p>{item.text}</p>
-                <Trash onClick={() => removeCom(item.id)} />
+              <div key={item.id} >
+                <div className="cardinfo-box-task-user">
+                  <img src={Avatar} className="cardinfo-img" alt="" />
+                  <p>{user}</p>
+                </div>
+                  <div className="cardinfo-box-task-trash">
+                    <p>{item.text}</p>
+                    <IconButton aria-label="delete" onClick={() => removeCom(item.id)}>
+                      <DeleteIcon  />
+                    </IconButton>
+                  </div>
+
               </div>
             ))}
           </div>
@@ -234,9 +245,6 @@ function CardInfo(props: CardInfoProps) {
             onSubmit={addCom}
           />
         </div>
-
-
-
 
 
         {/*DATE*/}
@@ -290,6 +298,7 @@ function CardInfo(props: CardInfoProps) {
             <CheckSquare />
             <p>Tasks</p>
           </div>
+
           <div className="cardinfo-box-progress-bar">
             <div
               className="cardinfo-box-progress"
@@ -310,7 +319,10 @@ function CardInfo(props: CardInfoProps) {
                   }
                 />
                 <p className={item.completed ? "completed" : ""}>{item.text}</p>
-                <Trash onClick={() => removeTask(item.id)} />
+                <IconButton aria-label="delete" onClick={() => removeTask(item.id)}>
+                  <DeleteIcon  />
+                </IconButton>
+
               </div>
             ))}
           </div>

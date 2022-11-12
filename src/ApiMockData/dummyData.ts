@@ -17,7 +17,7 @@ export const ApiMockResponse: IBoard[] = [
         ],
         desc: "Task1 Detail Description",
         messages:[
-          {id:1651319543435.593,text: "Task1_subtask1"}
+          {id:1651319543435.593,text: "Task1_subtask1",user:""}
         ]
       },
       {
@@ -27,7 +27,7 @@ export const ApiMockResponse: IBoard[] = [
         date: "",
         tasks: [],
         messages:[
-          {id:1651319543435.593,text: "Task1_subtask1"}
+          {id:1651319543435.593,text: "Task1_subtask1",user:""}
         ]
       },
     ],
@@ -46,7 +46,7 @@ export const ApiMockResponse: IBoard[] = [
         ],
         desc: "Task1 Detail Description",
         messages:[
-          {id:1651319543435.593,text: "Task1_subtask1"}
+          {id:1651319543435.593,text: "Task1_subtask1",user:""}
         ]
       },
     ],
@@ -63,7 +63,7 @@ export const ApiMockResponse: IBoard[] = [
         tasks: [],
         desc: "Task1 Detail Description",
         messages:[
-          {id:1651319543435.593,text: "Task1_subtask1"}
+          {id:1651319543435.593,text: "Task1_subtask1",user:""}
         ]
       },
     ],
@@ -82,9 +82,10 @@ export const ApiMockResponse: IBoard[] = [
         ],
         desc: "Task1 Detail Description",
         messages:[
-          {id:1651319543435.593,text: "Task1_subtask1"}
+          {id:1651319543435.593,text: "Task1_subtask1",user:""}
         ]
       },
     ],
   },
 ];
+

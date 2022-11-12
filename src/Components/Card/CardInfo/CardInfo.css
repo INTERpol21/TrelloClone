@@ -109,6 +109,25 @@
   gap: 10px;
 }
 
+.cardinfo-box-task-trash{
+  display: flex;
+  padding: 0.5rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardinfo-box-task-user{
+  display: flex;
+  padding: 0.5rem;
+
+}
+
+.cardinfo-img{
+  width: 28px;
+  margin: 0 10px 0 0;
+  border-radius: 22px;
+}
+
 .cardinfo-box-task-checkbox input,
 .cardinfo-box-task-checkbox svg {
   height: 18px;

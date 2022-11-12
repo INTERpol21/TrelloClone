@@ -4,6 +4,13 @@ import "./Dashboard.css";
 import CustomInput from "../Components/CustomInput/CustomInput";
 import { ICard, IBoard } from "../Interfaces/Kanban";
 import { fetchBoardList, updateLocalStorageBoards } from "../Helper/APILayers";
+import Avatar from "../asserts/images/user.png";
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import TextField from '@mui/material/TextField';
+
 
 function Dashboard() {
   const [boards, setBoards] = useState<IBoard[]>([]);
@@ -15,11 +22,11 @@ function Dashboard() {
     const boards: IBoard[] = await fetchBoardList();
     setBoards(boards);
   }
+
   const [targetCard, setTargetCard] = useState({
     boardId: 0,
     cardId: 0,
   });
-
 
 
   const addBoardHandler = (name: string) => {
@@ -53,7 +60,8 @@ function Dashboard() {
       date: "",
       tasks: [],
       desc: "",
-      messages:[],
+      messages: [],
+
 
 
     });
@@ -137,15 +145,69 @@ function Dashboard() {
   useEffect(() => {
     updateLocalStorageBoards(boards);
   }, [boards]);
+
+
+  const [open, setOpen] = React.useState(true);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const [user, setUser] = React.useState('Anton');
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUser(event.target.value);
+  };
+
+  const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+
+  };
+
   return (
     <div className="app">
       <div className="app-nav">
-        <h1>Trello Kanban Board</h1>
+        <h1>Kanban Board</h1>
+
+        <div className="app-nav-form">
+          <img src={Avatar} className="app-nav-form-img" alt="" />
+
+          <div>
+            <Button variant="contained" onClick={handleOpen}>Login</Button>
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <Typography className="typography-modal" id="modal-modal-title" variant="h6" component="h2">
+                  Введите имя автора
+                </Typography>
+                <div className="form">
+                  <TextField
+                    id="outlined-name"
+                    label="Name"
+                    value={user}
+                    onChange={handleChange}
+                  />
+                  <Button onClick={handleClose}>Login</Button>
+                </div>
+              </Box>
+            </Modal>
+          </div>
+        </div>
       </div>
+
       <div className="app-boards-container">
         <div className="app-boards">
           {boards.map((item) => (
             <Board
+              user={user}
               key={item.id}
               board={item}
               addCard={addCardHandler}

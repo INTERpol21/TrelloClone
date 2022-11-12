@@ -6,7 +6,7 @@ export interface ILabel {
 export interface IComment {
   id: number;
   text: string;
-
+  user:string
 
 }
 
@@ -23,12 +23,14 @@ export interface ICard {
   date: string;
   tasks: ITask[];
   desc?: string;
-  messages:IComment[]
+  messages:IComment[];
+
 }
 
 export interface IBoard {
   id: number;
   title: string;
   cards: ICard[];
+
 }
 
