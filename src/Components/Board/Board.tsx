@@ -29,6 +29,7 @@ function Board(props: BoardProps) {
     onDragEnter,
     updateCard,
     user,
+
   } = props;
   const [inputText, setInputText] = useState(board.title);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,6 +70,7 @@ function Board(props: BoardProps) {
         <div className="board-cards custom-scroll">
           {board?.cards?.map((item) => (
             <Card
+              inputText={board.title}
               user={user}
               key={item.id}
               card={item}

@@ -15,11 +15,12 @@ interface CardProps {
   onDragEnter: (boardId: number, cardId: number) => void;
   updateCard: (boardId: number, cardId: number, card: ICard) => void;
   user:string
+  inputText:string
 }
 
 //Карточка без popup
 function Card(props: CardProps) {
-  const { card, boardId, removeCard, onDragEnd, onDragEnter, updateCard,user} =
+  const { card, boardId, removeCard, onDragEnd, onDragEnter, updateCard,user,inputText} =
     props;
   const { id, title, desc, date, tasks, labels,messages} = card;
   const [showDropdown, setShowDropdown] = useState(false);
@@ -31,6 +32,7 @@ function Card(props: CardProps) {
     <>
       {showModal && (
         <CardInfo
+          inputText={inputText}
           user={user}
           onClose={() => setShowModal(false)}
           card={card}

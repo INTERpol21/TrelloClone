@@ -18,11 +18,12 @@ interface CardInfoProps {
   boardId: number;
   updateCard: (boardId: number, cardId: number, card: ICard) => void;
   user:string
+  inputText:string
 }
 
 
 function CardInfo(props: CardInfoProps) {
-  const { onClose, card, boardId, updateCard, user} = props;
+  const { onClose, card, boardId, updateCard, user,inputText} = props;
   const [selectedColor, setSelectedColor] = useState("");
   const [cardValues, setCardValues] = useState<ICard>({
     ...card,
@@ -183,6 +184,8 @@ function CardInfo(props: CardInfoProps) {
   return (
     <Modal onClose={onClose}>
       <div className="cardinfo">
+        <div>Имя автора карточки {user}</div>
+        <div>Карточка {inputText}</div>
         <div className="cardinfo-box">
           {/*TITLE*/}
           {/*Добавил выход из окна, по нажатию на X и через клавишу Escape*/}
@@ -192,6 +195,7 @@ function CardInfo(props: CardInfoProps) {
           <div className="cardinfo-box-title">
             <Type />
             <p>Title</p>
+
           </div>
           <CustomInput
             defaultValue={cardValues.title}
