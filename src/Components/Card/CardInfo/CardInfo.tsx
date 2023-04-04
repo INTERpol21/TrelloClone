@@ -1,42 +1,38 @@
-import React, { useEffect, useState } from "react";
-import { Calendar, CheckSquare, List, MessageCircle, Tag, Type, XCircle } from "react-feather";
-import { colorsList } from "../../../Helper/Util";
-import Modal from "../../Modal/Modal";
-import CustomInput from "../../CustomInput/CustomInput";
-import "./CardInfo.css";
-import { ICard, IComment, ILabel, ITask } from "../../../Interfaces/Kanban";
-import Chip from "../../Common/Chip";
-import Avatar from "../../../asserts/images/user.png";
-import DeleteIcon from '@mui/icons-material/Delete';
-import IconButton from '@mui/material/IconButton';
-
-
+import { useEffect, useState } from 'react'
+import { Calendar, CheckSquare, List, MessageCircle, Tag, Type, XCircle } from 'react-feather'
+import { colorsList } from '../../../Helper/Util'
+import Modal from '../../Modal/Modal'
+import CustomInput from '../../CustomInput/CustomInput'
+import './CardInfo.css'
+import { ICard, IComment, ILabel, ITask } from '../../../Interfaces/Kanban'
+import Chip from '../../Common/Chip'
+import Avatar from '../../../asserts/images/user.png'
+import DeleteIcon from '@mui/icons-material/Delete'
+import IconButton from '@mui/material/IconButton'
 
 interface CardInfoProps {
-  onClose: () => void;
-  card: ICard;
-  boardId: number;
-  updateCard: (boardId: number, cardId: number, card: ICard) => void;
-  user:string
-  inputText:string
+  onClose: () => void
+  card: ICard
+  boardId: number
+  updateCard: (boardId: number, cardId: number, card: ICard) => void
+  user: string
+  inputText: string
 }
 
-
 function CardInfo(props: CardInfoProps) {
-  const { onClose, card, boardId, updateCard, user,inputText} = props;
-  const [selectedColor, setSelectedColor] = useState("");
+  const { onClose, card, boardId, updateCard, user, inputText } = props
+  const [selectedColor, setSelectedColor] = useState('')
   const [cardValues, setCardValues] = useState<ICard>({
     ...card,
-  });
+  })
 
   const updateTitle = (value: string) => {
-    setCardValues({ ...cardValues, title: value });
-  };
+    setCardValues({ ...cardValues, title: value })
+  }
 
   const updateDesc = (value: string) => {
-
-    setCardValues({ ...cardValues, desc: value });
-  };
+    setCardValues({ ...cardValues, desc: value })
+  }
 
   // const updateCom = (value: string) => {
   //   setCardValues({ ...cardValues, message: value });
@@ -46,14 +42,14 @@ function CardInfo(props: CardInfoProps) {
     const message: IComment = {
       id: Date.now() + Math.random() * 2,
       text: value,
-      user:user
-    };
+      user: user,
+    }
 
     setCardValues({
       ...cardValues,
       messages: [...cardValues.messages, message],
-    });
-  };
+    })
+  }
 
   // const updateCom = (id: number) => {
   //   const messages = [...cardValues.messages];
@@ -69,133 +65,124 @@ function CardInfo(props: CardInfoProps) {
   // };
 
   const removeCom = (id: number) => {
-    const messages = [...cardValues.messages];
+    const messages = [...cardValues.messages]
 
-    const tempTasks = messages.filter((item) => item.id !== id);
+    const tempTasks = messages.filter((item) => item.id !== id)
     setCardValues({
       ...cardValues,
       messages: tempTasks,
-    });
-  };
-
+    })
+  }
 
   const addLabel = (label: ILabel) => {
-    const index = cardValues.labels.findIndex(
-      (item) => item.text === label.text,
-    );
-    if (index > -1) return; //if label text already exist then return
+    const index = cardValues.labels.findIndex((item) => item.text === label.text)
+    if (index > -1) return //if label text already exist then return
 
-    setSelectedColor("");
+    setSelectedColor('')
     setCardValues({
       ...cardValues,
       labels: [...cardValues.labels, label],
-    });
-  };
+    })
+  }
 
   const removeLabel = (label: ILabel) => {
-    const tempLabels = cardValues.labels.filter(
-      (item) => item.text !== label.text,
-    );
+    const tempLabels = cardValues.labels.filter((item) => item.text !== label.text)
 
     setCardValues({
       ...cardValues,
       labels: tempLabels,
-    });
-  };
+    })
+  }
 
   const addTask = (value: string) => {
     const task: ITask = {
       id: Date.now() + Math.random() * 2,
       completed: false,
       text: value,
-    };
+    }
     setCardValues({
       ...cardValues,
       tasks: [...cardValues.tasks, task],
-    });
-  };
+    })
+  }
 
   const removeTask = (id: number) => {
-    const tasks = [...cardValues.tasks];
+    const tasks = [...cardValues.tasks]
 
-    const tempTasks = tasks.filter((item) => item.id !== id);
+    const tempTasks = tasks.filter((item) => item.id !== id)
     setCardValues({
       ...cardValues,
       tasks: tempTasks,
-    });
-  };
+    })
+  }
 
   const updateTask = (id: number, value: boolean) => {
-    const tasks = [...cardValues.tasks];
+    const tasks = [...cardValues.tasks]
 
-    const index = tasks.findIndex((item) => item.id === id);
-    if (index < 0) return;
+    const index = tasks.findIndex((item) => item.id === id)
+    if (index < 0) return
 
-    tasks[index].completed = Boolean(value);
+    tasks[index].completed = Boolean(value)
 
     setCardValues({
       ...cardValues,
       tasks,
-    });
-  };
+    })
+  }
 
   const calculatePercent = () => {
-    if (!cardValues.tasks?.length) return 0;
-    const completed = cardValues.tasks?.filter(
-      (item) => item.completed,
-    )?.length;
-    return (completed / cardValues.tasks?.length) * 100;
-  };
+    if (!cardValues.tasks?.length) return 0
+    const completed = cardValues.tasks?.filter((item) => item.completed)?.length
+    return (completed / cardValues.tasks?.length) * 100
+  }
 
   const updateDate = (date: string) => {
-    if (!date) return;
+    if (!date) return
 
     setCardValues({
       ...cardValues,
       date,
-    });
-  };
+    })
+  }
 
   useEffect(() => {
-    if (updateCard) updateCard(boardId, cardValues.id, cardValues);
+    if (updateCard) updateCard(boardId, cardValues.id, cardValues)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cardValues]);
+  }, [cardValues])
 
-
-  const calculatedPercent = calculatePercent();
+  const calculatedPercent = calculatePercent()
   //Информация в popup
 
   const onKeydown = ({ key }: KeyboardEvent) => {
     switch (key) {
-      case "Escape":
-        onClose();
-        break;
+      case 'Escape':
+        onClose()
+        break
     }
-  };
+  }
 
   // c помощью useEffect цепляем обработчик к нажатию клавиш
   // https://ru.reactjs.org/docs/hooks-effect.html
   useEffect(() => {
-    document.addEventListener("keydown", onKeydown);
-    return () => document.removeEventListener("keydown", onKeydown);
-  });
-
+    document.addEventListener('keydown', onKeydown)
+    return () => document.removeEventListener('keydown', onKeydown)
+  })
 
   return (
     <Modal onClose={onClose}>
       <div className="cardinfo">
-        <div>Имя автора карточки {user}</div>
-        <div>Карточка {inputText}</div>
+        {/*Добавил выход из окна, по нажатию на X и через клавишу Escape*/}
+        <div onClick={onClose} className="cardinfo-box-title-circle">
+          <XCircle className="cardinfo-box-title-svg-circle" />
+          <h3>Автор карточки {user}</h3>
+          <h3>Карточка {inputText}</h3>
+        </div>
         <div className="cardinfo-box">
           {/*TITLE*/}
-          {/*Добавил выход из окна, по нажатию на X и через клавишу Escape*/}
-          <div onClick={onClose} className="cardinfo-box-title-circle">
-            <XCircle className="cardinfo-box-title-svg-circle" />
-          </div>
+
           <div className="cardinfo-box-title">
             <Type />
             <p>Title</p>
-
           </div>
           <CustomInput
             defaultValue={cardValues.title}
@@ -213,7 +200,7 @@ function CardInfo(props: CardInfoProps) {
           </div>
           <CustomInput
             defaultValue={cardValues.desc}
-            text={cardValues.desc || "Add a Description"}
+            text={cardValues.desc || 'Add a Description'}
             placeholder="Enter description"
             onSubmit={updateDesc}
           />
@@ -228,28 +215,22 @@ function CardInfo(props: CardInfoProps) {
 
           <div className="cardinfo-box-task-list">
             {cardValues.messages.map((item) => (
-              <div key={item.id} >
+              <div key={item.id}>
                 <div className="cardinfo-box-task-user">
                   <img src={Avatar} className="cardinfo-img" alt="" />
                   <p>{user}</p>
                 </div>
-                  <div className="cardinfo-box-task-trash">
-                    <p>{item.text}</p>
-                    <IconButton aria-label="delete" onClick={() => removeCom(item.id)}>
-                      <DeleteIcon  />
-                    </IconButton>
-                  </div>
-
+                <div className="cardinfo-box-task-trash">
+                  <p>{item.text}</p>
+                  <IconButton aria-label="delete" onClick={() => removeCom(item.id)}>
+                    <DeleteIcon />
+                  </IconButton>
+                </div>
               </div>
             ))}
           </div>
-          <CustomInput
-            text={"Add a comment"}
-            placeholder="Enter comment"
-            onSubmit={addCom}
-          />
+          <CustomInput text={'Add a comment'} placeholder="Enter comment" onSubmit={addCom} />
         </div>
-
 
         {/*DATE*/}
         <div className="cardinfo-box">
@@ -282,7 +263,7 @@ function CardInfo(props: CardInfoProps) {
               <li
                 key={index}
                 style={{ backgroundColor: item }}
-                className={selectedColor === item ? "li-active" : ""}
+                className={selectedColor === item ? 'li-active' : ''}
                 onClick={() => setSelectedColor(item)}
               />
             ))}
@@ -290,9 +271,7 @@ function CardInfo(props: CardInfoProps) {
           <CustomInput
             text="Add Label"
             placeholder="Enter label text"
-            onSubmit={(value: string) =>
-              addLabel({ color: selectedColor, text: value })
-            }
+            onSubmit={(value: string) => addLabel({ color: selectedColor, text: value })}
           />
         </div>
 
@@ -308,7 +287,7 @@ function CardInfo(props: CardInfoProps) {
               className="cardinfo-box-progress"
               style={{
                 width: `${calculatedPercent}%`,
-                backgroundColor: calculatedPercent === 100 ? "limegreen" : "",
+                backgroundColor: calculatedPercent === 100 ? 'limegreen' : '',
               }}
             />
           </div>
@@ -318,27 +297,20 @@ function CardInfo(props: CardInfoProps) {
                 <input
                   type="checkbox"
                   defaultChecked={item.completed}
-                  onChange={(event) =>
-                    updateTask(item.id, event.target.checked)
-                  }
+                  onChange={(event) => updateTask(item.id, event.target.checked)}
                 />
-                <p className={item.completed ? "completed" : ""}>{item.text}</p>
+                <p className={item.completed ? 'completed' : ''}>{item.text}</p>
                 <IconButton aria-label="delete" onClick={() => removeTask(item.id)}>
-                  <DeleteIcon  />
+                  <DeleteIcon />
                 </IconButton>
-
               </div>
             ))}
           </div>
-          <CustomInput
-            text={"Add a Task"}
-            placeholder="Enter task"
-            onSubmit={addTask}
-          />
+          <CustomInput text={'Add a Task'} placeholder="Enter task" onSubmit={addTask} />
         </div>
       </div>
     </Modal>
-  );
+  )
 }
 
-export default CardInfo;
+export default CardInfo
